@@ -211,5 +211,10 @@ services:
 
 networks:
   soc:
-    external: true
-    name: soc-wazuh-caldera-hive-cortex_soc
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.23.0.0/16
+    driver_opts:
+      com.docker.network.bridge.name: br_soc

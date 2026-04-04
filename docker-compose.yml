@@ -19,6 +19,30 @@ services:
       - ./data/suricata/rules:/var/lib/suricata/rules
       - ./data/suricata/logs:/var/log/suricata/
     command: /bin/bash -c "suricata-update && suricata -c /etc/suricata/suricata.yaml -i br_soc && tail -f /var/log/cron.log"
+ ####### Apps #######
+  server-app:
+    build:
+      context: ./server-app/.
+    networks:
+      - soc
+    ports:
+      - "3001:80"
+    environment:
+      RESET_ACESS_METRIC: "900000"
+  curl:
+    build:
+      context: ./curl/.
+    networks:
+      - soc
+    depends_on:
+      - server-app
+    entrypoint: /bin/sh
+    command: -c "
+      while true; do
+        curl -s http://server-app/ > /dev/null;
+        sleep 5;
+      done
+    "
  ####### Maildev #######
   maildev:
     image: maildev/maildev
