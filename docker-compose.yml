@@ -36,13 +36,12 @@ services:
       - soc
     depends_on:
       - server-app
-    entrypoint: /bin/sh
-    command: -c "
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
       while true; do
         curl -s http://server-app/ > /dev/null;
         sleep 5;
       done
-    "
  ####### Maildev #######
   maildev:
     image: maildev/maildev
