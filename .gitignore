@@ -6,6 +6,6 @@ cassandra/
 elasticsearch/
 cortex/cortex-jobs/
 cortex/config/index.conf
-cortex/config/secret.conf
-cortex/config/index.conf                                                                                                                                                                                                        cortex/config/secret.conf 
-cortex/config/index.conf                                                                                                                                                                                                        cortex/config/index.conf 
+thehive/config/secret.conf
+thehive/config/index.conf                                                                                                                                                                                                        cortex/config/secret.conf 
+thehive/config/secret.conf                                                                                                                                                                                                        cortex/config/index.conf 
