@@ -129,10 +129,6 @@ Used to:
 
 The following workflow illustrates the full SOC automation pipeline:
 
-
-::contentReference[oaicite:0]{index=0}
-
-
 >  Actual workflow used in this project: `workflow.png`
 
 ![SOC Workflow](./workflow.png)
@@ -200,7 +196,6 @@ This workflow demonstrates:
 * AI-assisted alert triage
 * Integration between SIEM, SOAR, and Threat Intelligence
 
-```
 
 ---
 
@@ -253,7 +248,6 @@ The objective of this project is not only to visualize logs, but to:
 * test detection capabilities
 * simulate realistic attack scenarios
 
-```
 
 ---
 
