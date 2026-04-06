@@ -365,14 +365,23 @@ Edit the Wazuh manager configuration:
 config/wazuh/wazuh_cluster/wazuh_manager.conf
 ```
 
-Locate the integration block and set your Discord webhook URL:
+Add the integration block and set your Discord webhook URL and n8n:
 
-```xml
-<integration>
-  <name>custom-discord</name>
-  <hook_url>https://discord.com/api/webhooks/XXXXX</hook_url>
-  <alert_format>json</alert_format>
-</integration>
+``` </global>
+  <integration>
+    <name>custom-discord</name>
+    <hook_url>https://discord.com/api/webhooks/XXXXXX/>
+    <level>10</level>
+    <alert_format>json</alert_format>
+  </integration>
+  <integration>
+    <name>custom-n8n</name>
+    <hook_url>http://n8n:5678/webhook/wazuh-alert</hook_url>
+    <level>10</level>
+    <alert_format>json</alert_format>
+  </integration>
+  <alerts>
+
 ```
 
 ---
@@ -384,6 +393,18 @@ Apply changes:
 ```bash
 docker restart wazuh.manager
 ```
+### Troubleshooting Fix: JSON decoder error
+
+If you see:
+
+wazuh-analysisd: ERROR: Too many fields for JSON decoder
+
+Run:
+ 
+```bash
+docker exec -it  wazuh.manager bash
+sed -i 's/^analysisd.decoder_order_size=.*/analysisd.decoder_order_size=1024/' /var/ossec/etc/internal_options.conf
+docker restart wazuh.manager
 
 ---
 
