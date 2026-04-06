@@ -1,4 +1,3 @@
-````markdown
 # SOC-WAZUH-CALDERA-HIVE-CORTEX
 
 Open-source SOC lab built with Docker Compose, combining attack simulation, detection, SIEM, incident response, automation, and notification.
