@@ -407,6 +407,7 @@ sed -i 's/^analysisd.decoder_order_size=.*/analysisd.decoder_order_size=1024/' /
 docker restart wazuh.manager
 
 ---
+```
 
 ###  5. Automation (n8n)
 
