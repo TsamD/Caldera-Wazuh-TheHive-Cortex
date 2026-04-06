@@ -2,14 +2,18 @@ services:
  ####### Zeek  #######
   zeek:
     image: zeek/zeek:lts
+    restart: always
     network_mode: host
     volumes:
       - ./data/zeek/logs:/logs
-    command: /bin/bash -c "cd /logs && zeek -C -i br_soc"
+      - ./config/zeek/local.zeek:/usr/local/zeek/share/zeek/site/local.zeek:ro
+    command: /bin/bash -c "cd /logs && zeek -C -i br_soc /usr/local/zeek/share/zeek/site/local.zeek"
+#    command: /bin/bash -c "cd /logs && zeek -C -i br_soc"
   ####### Suricata #######
   suricata:
     build:
       context: suricata/.
+    restart: always
     network_mode: host
     cap_add:
      - NET_ADMIN
@@ -23,25 +27,16 @@ services:
   server-app:
     build:
       context: ./server-app/.
+    restart: always
     networks:
       - soc
     ports:
       - "3001:80"
-    environment:
-      RESET_ACESS_METRIC: "900000"
   curl:
     build:
       context: ./curl/.
     networks:
       - soc
-    depends_on:
-      - server-app
-    entrypoint: ["/bin/sh", "-c"]
-    command: >
-      while true; do
-        curl -s http://server-app/ > /dev/null;
-        sleep 5;
-      done
  ####### Maildev #######
   maildev:
     image: maildev/maildev
@@ -57,7 +52,7 @@ services:
  ####### Caldera #######
   caldera:
     image: ghcr.io/mitre/caldera
-    restart: no
+    restart: always
     networks:
       soc:
     ports:

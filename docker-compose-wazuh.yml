@@ -1,7 +1,11 @@
 # Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
 services:
   wazuh.manager:
-    image: wazuh/wazuh-manager:4.14.1
+    build:
+      context: .
+      dockerfile: wazuh.manager/Dockerfile
+    image: wazuh/wazuh-manager-custom:4.14.1
+#    image: wazuh/wazuh-manager:4.14.1
     hostname: wazuh.manager
     restart: always
     ulimits:
@@ -34,7 +38,8 @@ services:
       - wazuh_logs:/var/ossec/logs
       - wazuh_queue:/var/ossec/queue
       - wazuh_var_multigroups:/var/ossec/var/multigroups
-      - wazuh_integrations:/var/ossec/integrations
+      - ./config/wazuh/integrations:/var/ossec/integrations
+#      - wazuh_integrations:/var/ossec/integrations
       - wazuh_active_response:/var/ossec/active-response/bin
       - wazuh_agentless:/var/ossec/agentless
       - wazuh_wodles:/var/ossec/wodles
