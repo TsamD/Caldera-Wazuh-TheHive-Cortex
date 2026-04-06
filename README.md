@@ -365,9 +365,9 @@ Edit the Wazuh manager configuration:
 config/wazuh/wazuh_cluster/wazuh_manager.conf
 ```
 
-Add the integration block and set your Discord webhook URL and n8n:
+Add the integration block between global and alerte block and set your Discord webhook URL and n8n :
 
-``` </global>
+``` 
   <integration>
     <name>custom-discord</name>
     <hook_url>https://discord.com/api/webhooks/XXXXXX/>
@@ -380,7 +380,6 @@ Add the integration block and set your Discord webhook URL and n8n:
     <level>10</level>
     <alert_format>json</alert_format>
   </integration>
-  <alerts>
 
 ```
 
